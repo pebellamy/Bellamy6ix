@@ -25,4 +25,6 @@ def ffa():
     return render_template("ffa.html")
 
 if __name__ == '__main__':
+    # I changed this to run in debug mode so that it will reload when I make changes -> only works if you use python3 app.py instead of flask run for some reason
+    app.debug = True
     app.run()
