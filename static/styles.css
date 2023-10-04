@@ -10,3 +10,21 @@
 .text-centered {
     text-align: center;
 }
+
+/* ------------------------- */
+/* Caption Game Styles */
+
+@font-face {
+    font-family: 'New Yorker Caption';
+    src: url('/static/fonts/New Yorker/ACaslonPro-SemiboldItalic.otf'); format('opentype');
+    font-weight: bold;
+    font-style: italic;
+}
+/* Centered caption game title in the style of the new yorker, but cartoonier */
+.caption-game-title {
+    font-family: 'New Yorker Caption', sans-serif;
+    font-size: 14vh;
+    color: #000000;
+    text-align: center;
+    text-shadow: 2px 2px #ffffff;
+}

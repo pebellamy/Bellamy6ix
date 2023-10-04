@@ -24,6 +24,10 @@ def photos():
 def ffa():
     return render_template("ffa.html")
 
+@app.route("/caption-game")
+def caption_game():
+    return render_template("caption_game.html")
+
 if __name__ == '__main__':
     # I changed this to run in debug mode so that it will reload when I make changes -> only works if you use python3 app.py instead of flask run for some reason
     app.debug = True
