@@ -5,7 +5,7 @@ certifi==2021.5.30
 chardet==3.0.4
 click==6.7
 config==0.5.1
-dataclasses @ file:///tmp/build/80754af9/dataclasses_1614363715916/work
+# dataclasses @ file:///tmp/build/80754af9/dataclasses_1614363715916/work
 Flask==1.0.2
 Flask-Dance==0.14.0
 Flask-DebugToolbar==0.10.1
@@ -23,7 +23,7 @@ itsdangerous==0.24
 Jinja2==2.10
 lazy==1.3
 Mako==1.0.7
-MarkupSafe @ file:///opt/concourse/worker/volumes/live/16a820f0-3874-45b4-6b79-5313238ead21/volume/markupsafe_1621528157387/work
+# MarkupSafe @ file:///opt/concourse/worker/volumes/live/16a820f0-3874-45b4-6b79-5313238ead21/volume/markupsafe_1621528157387/work
 oauth2==1.9.0.post1
 oauthlib==2.0.7
 packaging==21.3
