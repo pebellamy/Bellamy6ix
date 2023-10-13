@@ -1,8 +1,78 @@
 {% extends "base.html" %}
 {% block content %}
 
-<div class="jumbotron">
-    <h1 class="caption-game-title">Caption Game</h1>
+<div class="caption-game-div">
+    <div class="jumbotron">
+        <h1 class="caption-game-title">Reverse Caption Contest</h1>
+    </div>
+    <div class="input-container">
+        <h3 class="image-prompt-input-title">Caption: <i>{{prompt}}</i></h3>
+        <input class="image-prompt-input" id="prompt-input"></input>
+        <button id="generate-image-btn">Generate Image</button>
+    </div>
+    <div class="image-response-container" id="response-container" style="display: none">
+        <div class="loader" id="loading-animation" style="display: none;">Loading...</div>
+        <!-- Image will be appended here -->
+        <!-- Italicized caption that is hidden until image is revealed -->
+        <div class="caption-container" id="caption-container" style="display: none;">
+            <i><p class="caption-text" id="caption-text">{{prompt}}</p></i>
+        </div>
+    </div>
 </div>
 
+<style>
+.caption-container {
+    text-align: center;
+    margin-top: 10px;
+    display: flex;
+    justify-content: center;
+}
+</style>
+
+<script>
+$(document).ready(function() {
+    $('#generate-image-btn').click(function() {
+        const promptValue = $('#prompt-input').val();
+        if (!promptValue) {
+            alert('Please enter a prompt.');
+            return;
+        }
+
+        // Hide the input
+        $('.input-container').hide();
+
+        // Show image response container
+        $('#response-container').show();
+
+        // Show the loading animation
+        $('#loading-animation').show();
+
+        $.ajax({
+            type: 'POST',
+            url: '/generate-image',
+            data: {
+                'prompt': promptValue
+            },
+            success: function(response) {
+                $('#loading-animation').hide();
+
+                const img = $('<img>', {
+                    src: response.image_url,
+                    alt: 'Generated Image'
+                });
+
+                // Insert the image just before the caption-container
+                img.insertBefore('#caption-container');
+
+                // Show the caption
+                $('#caption-container').show();
+            },
+            error: function(error) {
+                $('#loading-animation').hide();
+                alert('Error generating the image.');
+            }
+        });
+    });
+});
+</script>
 {% endblock %}
