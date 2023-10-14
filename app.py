@@ -1,9 +1,9 @@
 #from bellamy import app
-from flask import Flask, render_template, url_for, redirect, request, Blueprint, current_app, jsonify
+from flask import Flask, render_template, url_for, redirect, request, Blueprint, current_app, jsonify, send_from_directory
 from time import sleep
 
 app = Flask(__name__)
-# app.config['DEBUG'] = True # Set this to False for production
+app.config['DEBUG'] = True # Set this to False for production
 
 @app.route("/")
 def index():
@@ -26,8 +26,13 @@ def photos():
 def ffa():
     return render_template("ffa.html")
 
+# Define a route to serve the generated images
+@app.route('/static/stability_ai_output/<filename>')
+def serve_generated_image(filename):
+    return send_from_directory('static/stability_ai_output', filename)
+
 # Import the route functions from the controlers directory
-from controllers.generate_image_controller import generate_image
+from controllers.generate_image_stabilityai_controller import generate_image
 from controllers.caption_game_controller import caption_game
 
 # Register the blueprints with the Flask app
