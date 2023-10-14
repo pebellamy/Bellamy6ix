@@ -43,6 +43,7 @@ def stability_ai_request(prompt):
     )
 
     # Generate the image then save it to a file
+    img_urls = []
     for resp in answers:
         for artifact in resp.artifacts:
             if artifact.finish_reason == generation.FILTER:
@@ -50,11 +51,13 @@ def stability_ai_request(prompt):
                     "Your request activated the API's safety filters and could not be processed."
                     "Please modify the prompt and try again.")
             if artifact.type == generation.ARTIFACT_IMAGE:
+
                 img = Image.open(io.BytesIO(artifact.binary))
                 # Save our generated images with their seed number as the filename. should go in static/stability_ai_output/
                 img.save(f"static/stability_ai_output/{seed}.png")
                 image_url = url_for('serve_generated_image', filename=f"{seed}.png")
-                return image_url
+                img_urls += image_url
+        return img_urls
                 
 
 @generate_image.route("/generate-image", methods=["POST"])
@@ -67,15 +70,11 @@ def generate_image_route():
         # Mock a delay
         sleep(3)
         # Mock API response from Open AI API (https://platform.openai.com/docs/guides/images/usage)
-        mock_response = {
-            'data': [
-                {
-                    'url': "https://lilKyleStore.b-cdn.net/debug/DALL%C2%B7E%202023-10-11%2012.45.11%20-%20Comic-style%20drawing%20of%20a%20moonlit%20old%20monastery%20courtyard%20with%20cobblestone%20paths.%20Stone%20statues%20of%20angels%20with%20eerie%20expressions%20stand%20among%20ivy-covere.png"
-                }
-            ]
-        }
-        image_url = mock_response['data'][0]['url']
+        image_urls = []
+        for seed in ['1409325373574066945', '2440169983116909559', '6170566389842304918', '8090517238952629365']
+            image_url = url_for('serve_generated_image', filename=f"{seed}.png")
+            image_urls += image_url
     else:
-        image_url = stability_ai_request(full_prompt)
+        image_urls = stability_ai_request(full_prompt)
         
-    return jsonify({'image_url': image_url})
+    return jsonify({'image_urls': image_urls})

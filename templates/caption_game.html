@@ -12,10 +12,35 @@
     </div>
     <div class="image-response-container" id="response-container" style="display: none">
         <div class="loader" id="loading-animation" style="display: none;">Loading...</div>
-        <!-- Image will be appended here -->
-        <!-- Italicized caption that is hidden until image is revealed -->
-        <div class="caption-container" id="caption-container" style="display: none;">
-            <i><p class="caption-text" id="caption-text">{{prompt}}</p></i>
+        <!-- Grid for images -->
+        <div class="image-grid">
+            <!-- First Row -->
+            <div class="image-card" id="card-1">
+                <!-- Image will be appended here -->
+                <div class="caption-container">
+                    <i><p class="caption-text">{{prompt}}</p></i>
+                </div>
+            </div>
+            <div class="image-card" id="card-2">
+                <!-- Image will be appended here -->
+                <div class="caption-container">
+                    <i><p class="caption-text">{{prompt}}</p></i>
+                </div>
+            </div>
+    
+            <!-- Second Row -->
+            <div class="image-card" id="card-3">
+                <!-- Image will be appended here -->
+                <div class="caption-container">
+                    <i><p class="caption-text">{{prompt}}</p></i>
+                </div>
+            </div>
+            <div class="image-card" id="card-4">
+                <!-- Image will be appended here -->
+                <div class="caption-container">
+                    <i><p class="caption-text">{{prompt}}</p></i>
+                </div>
+            </div>
         </div>
     </div>
 </div>
